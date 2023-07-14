@@ -19,24 +19,24 @@ const Register = () => {
     const formObject = { email, username, password, passwordConfirmation };
     setLoading(true);
 
+    axios.post(`${HOST}/api/register`, formObject);
     axios
-  .post(`${HOST}/api/register`, formObject)
-  .then(function (response) {
-    console.info(response); // Log the response object
-    if (response.data && response.data.jwt) {
-      console.info(response.data);
-      setJwt(response.data.jwt);
-      handleSuccessNavigation();
-    } else {
-      console.error("Invalid response structure:", response);
-    }
-  })
-  .catch(function (error) {
-    console.error(error);
-  })
-  .finally(function () {
-    setLoading(false);
-  });
+      .post(`${HOST}/api/login`, {
+        identifier,
+        password,
+      })
+      .then(function (response) {
+        console.info(response.data);
+        // navigate to my account page when success
+        setJwt(response.data.jwt);
+        handleSucesssNavigation();
+      })
+      .catch(function (error) {
+        console.error(error.response.data);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
   };
   return (
     <div
