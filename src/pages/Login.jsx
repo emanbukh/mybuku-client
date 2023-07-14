@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useLocalStorage from "../hook/useLocalStorage";
+import { HOST } from "../api";
 
 const Login = () => {  const [isLoading, setLoading] = useState(false);
   const [jwt, setJwt] = useLocalStorage("token", "");
