@@ -7,7 +7,7 @@ const Login = () => {  const [isLoading, setLoading] = useState(false);
   const [jwt, setJwt] = useLocalStorage("token", "");
   const navigate = useNavigate();
   const handleSucesssNavigation = () => {
-    navigate("/my-account");
+    navigate("/my-profile");
   };
   const handleSubmit = (event) => {
     event.preventDefault();

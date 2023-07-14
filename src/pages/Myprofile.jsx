@@ -9,38 +9,32 @@ const Myprofile = () => {
   const [jwt, setJwt] = useLocalStorage("token", "");
   const [isAdmin, setAdmin] = useLocalStorage("isAdmin", false);
   const [user, setUser] = useLocalStorage("userData", null);
-  // const navigate = useNavigate();
-  // const handleNavigateToLogin = () => {
-  //   navigate("/login");
-  // };
-  // const fetchUserAccount = () => {
-  //   // get jwt from localStorage
-  //   console.log(jwt);
+  const navigate = useNavigate();
+  const handleNavigateToLogin = () => {
+    navigate("/login");
+  };
+  const fetchUserAccount = () => {
+    console.log(jwt);
 
-  //   // run get api
-  //   axios
-  //     .get(`${HOST}/private`, {
-  //       headers: { Authorization: `Bearer ${jwt}` },
-  //     })
-  //     .then(function (response) {
-  //       // handle success
-  //       console.info(response.data);
-  //       setUser(response.data.user);
-  //       setAdmin(response.data.user.isAdmin);
-  //     })
-  //     .catch(function (error) {
-  //       // handle error
-  //       console.error(error);
-  //       handleNavigateToLogin();
-  //     })
-  //     .finally(function () {
-  //       // always executed
-  //     });
-  // };
+    axios
+      .get(`${HOST}/private`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then(function (response) {
+        console.info(response.data);
+        setUser(response.data.user);
+        setAdmin(response.data.user.isAdmin);
+      })
+      .catch(function (error) {
+        console.error(error);
+        handleNavigateToLogin();
+      })
+      .finally(function () {});
+  };
 
-  // useEffect(() => {
-  //   fetchUserAccount();
-  // }, [jwt]);
+  useEffect(() => {
+    fetchUserAccount();
+  }, [jwt]);
 
   return (
     <div

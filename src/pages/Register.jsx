@@ -7,7 +7,7 @@ const Register = () => {
   const [isLoading, setLoading] = useState(false);
   const [jwt, setJwt] = useState("");
   const handleSuccessNavigation = () => {
-    navigate("/my-account");
+    navigate("/my-profile");
   };
 
   const handleSubmit = (event) => {
