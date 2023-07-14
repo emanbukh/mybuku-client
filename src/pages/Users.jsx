@@ -4,6 +4,7 @@ import { HOST } from "../api";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import pluralize from "pluralize";
+import Cookies from "js-cookie"
 
 const Users = () => {  const [user] = useLocalStorage("userData", null);
 const jwt = Cookies.get("token");
