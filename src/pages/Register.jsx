@@ -22,16 +22,17 @@ const Register = () => {
     axios
   .post(`${HOST}/api/register`, formObject)
   .then(function (response) {
-    console.info(response.data);
-    setJwt(response.data.jwt);
-    handleSuccessNavigation();
+    console.info(response); // Log the response object
+    if (response.data && response.data.jwt) {
+      console.info(response.data);
+      setJwt(response.data.jwt);
+      handleSuccessNavigation();
+    } else {
+      console.error("Invalid response structure:", response);
+    }
   })
   .catch(function (error) {
-    if (error.response && error.response.data) {
-      console.error(error.response.data);
-    } else {
-      console.error(error);
-    }
+    console.error(error);
   })
   .finally(function () {
     setLoading(false);
