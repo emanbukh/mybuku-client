@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useLocalStorage = (storageKey, fallbackState) => {
+const useLocalStorage = (storageKey, fallbackState) => {console.log(storageKey);
   const [value, setValue] = useState(
     JSON.parse(localStorage.getItem(storageKey)) ?? fallbackState
   );
@@ -8,8 +8,7 @@ const useLocalStorage = (storageKey, fallbackState) => {
   useEffect(() => {
     localStorage.setItem(storageKey, JSON.stringify(value));
   }, [value, storageKey]);
-
-  return [value, setValue];
+  return [value, setValue];;
 };
 
 export default useLocalStorage;

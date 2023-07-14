@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useEffect } from "react";
 import useLocalStorage from "../hook/useLocalStorage";
 import axios from "axios";
@@ -21,7 +21,7 @@ const Myprofile = () => {
         headers: { Authorization: `Bearer ${jwt}` },
       })
       .then(function (response) {
-        console.info(response.data);
+        console.info(response);
         setUser(response.data.user);
         setAdmin(response.data.user.isAdmin);
       })

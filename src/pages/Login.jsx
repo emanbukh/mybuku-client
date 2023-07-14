@@ -56,12 +56,12 @@ const Login = () => {  const [isLoading, setLoading] = useState(false);
           boxShadow: "1px 1px 15px  #e9ecef", display: "flex", flexDirection: "column",alignItems: "center"
         }}
       >
-        <p className="mt-[10px] mb-[10px]">
+        <div className="mt-[10px] mb-[10px]">
           <h1 className="text-xl font-bold">Bookworm Login</h1>
-        </p>
-        <p className="w-[250px] text-center  ">
+        </div>
+        <div className="w-[250px] text-center  ">
           <h3>Hey, enter your details to get sign to your account</h3>
-        </p>
+        </div>
         <form
           className="w-[320px] h-[360px]"
           onSubmit={handleSubmit}
