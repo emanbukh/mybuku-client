@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useLocalStorage from "../hook/useLocalStorage";
 import { HOST } from "../api";
+import Cookies from "js-cookie";
 
 const Login = () => {  const [isLoading, setLoading] = useState(false);
-  const [jwt, setJwt] = useLocalStorage("token", "");
+  // const [jwt, setJwt] = useLocalStorage("token", "");
   const navigate = useNavigate();
   const handleSucesssNavigation = () => {
     navigate("/my-profile");
@@ -25,8 +26,8 @@ const Login = () => {  const [isLoading, setLoading] = useState(false);
       })
       .then(function (response) {
         console.info(response.data.jwt);
-        Cookies.set("token", response.data.jwt);
         // navigate to my account page when success
+        Cookies.set("token", response.data.jwt);
         // setJwt(response.data.jwt);
         handleSucesssNavigation();
       })

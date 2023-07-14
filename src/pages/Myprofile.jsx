@@ -6,26 +6,27 @@ import { Link, useNavigate } from "react-router-dom";
 import { HOST } from "../api";
 import Cookies from "js-cookie";
 
+
 const Myprofile = () => {
   // const [jwt, setJwt] = useLocalStorage("token", "");
-  const jwt =Cookies.get("token")
-  const [isAdmin, setAdmin] = useLocalStorage("isAdmin", false);
+  const jwt = Cookies.get("token");
   const [user, setUser] = useLocalStorage("userData", null);
   const navigate = useNavigate();
   const handleNavigateToLogin = () => {
-    navigate("/login");
+    navigate("/library");
   };
   const fetchUserAccount = () => {
     console.log(jwt);
+    Cookies.get("token");
 
     axios
       .get(`${HOST}/private`, {
         headers: { Authorization: `Bearer ${jwt}` },
       })
       .then(function (response) {
-        console.info(response);
+        console.info(response.data);
         setUser(response.data.user);
-        setAdmin(response.data.user.isAdmin);
+        
       })
       .catch(function (error) {
         console.error(error);

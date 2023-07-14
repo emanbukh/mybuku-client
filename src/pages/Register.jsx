@@ -5,7 +5,7 @@ import useLocalStorage from "../hook/useLocalStorage";
 import { HOST } from "../api";
 
 const Register = () => {
-  const [jwt, setJwt] = useLocalStorage("token", "");
+  const [jwt, setJwt] = useLocalStorage("token", "");const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);const [isAdmin, setIsAdmin] = useState(false)
   const handleSuccessNavigation = () => {
     navigate("/my-profile");
