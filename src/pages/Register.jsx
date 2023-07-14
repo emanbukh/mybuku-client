@@ -19,24 +19,20 @@ const Register = () => {
     const formObject = { email, username, password, passwordConfirmation };
     setLoading(true);
 
-    axios.post(`${HOST}/api/register`, formObject);
     axios
-      .post(`${HOST}/api/login`, {
-        identifier,
-        password,
-      })
-      .then(function (response) {
-        console.info(response.data);
-        // navigate to my account page when success
-        setJwt(response.data.jwt);
-        handleSucesssNavigation();
-      })
-      .catch(function (error) {
-        console.error(error.response.data);
-      })
-      .finally(function () {
-        setLoading(false);
-      });
+  .post(`${HOST}/api/register`, formObject)
+  .then(function (response) {
+    console.info(response.data);
+    // navigate to my account page when success
+    setJwt(response.data.jwt);
+    handleSucesssNavigation();
+  })
+  .catch(function (error) {
+    console.error(error.response.data);
+  })
+  .finally(function () {
+    setLoading(false);
+  });
   };
   return (
     <div
