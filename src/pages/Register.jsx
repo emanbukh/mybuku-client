@@ -20,18 +20,22 @@ const Register = () => {
     setLoading(true);
 
     axios
-      .post(`${HOST}/api/register`, formObject)
-      .then(function (response) {
-        console.info(response.data);
-        setJwt(response.data.jwt);
-        handleSuccessNavigation();
-      })
-      .catch(function (error) {
-        console.error(error.response.data);
-      })
-      .finally(function () {
-        setLoading(false);
-      });
+  .post(`${HOST}/api/register`, formObject)
+  .then(function (response) {
+    console.info(response.data);
+    setJwt(response.data.jwt);
+    handleSuccessNavigation();
+  })
+  .catch(function (error) {
+    if (error.response && error.response.data) {
+      console.error(error.response.data);
+    } else {
+      console.error(error);
+    }
+  })
+  .finally(function () {
+    setLoading(false);
+  });
   };
   return (
     <div
