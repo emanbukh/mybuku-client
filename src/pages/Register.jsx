@@ -25,7 +25,7 @@ const Register = () => {
     console.info(response.data);
     // navigate to my account page when success
     setJwt(response.data.jwt);
-    handleSucesssNavigation();
+    handleSuccessNavigation();
   })
   .catch(function (error) {
     console.error(error.response.data);
