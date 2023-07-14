@@ -1,14 +1,33 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Register = () => {
+const Register = () => {const [isLoading, setLoading] = useState(false);
+const [jwt, setJwt] = useState("");const handleSuccessNavigation = () => {
+  navigate("/my-account");
+};
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = event.target[0].value;
     const username = event.target[1].value;
     const password = event.target[2].value;
     const passwordConfirmation = event.target[3].value;
-    const formObject = { email, username, password, passwordConfirmation };
+    const formObject = { email, username, password, passwordConfirmation };setLoading(true);
+
+  axios
+    .post(`${HOST}/api/register`, formObject)
+    .then(function (response) {
+      console.info(response.data);
+      setJwt(response.data.jwt);
+      handleSuccessNavigation();
+    })
+    .catch(function (error) {
+      console.error(error.response.data);
+    })
+    .finally(function () {
+      setLoading(false);
+    });
 
   };
   return (
