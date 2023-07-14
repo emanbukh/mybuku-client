@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import useLocalStorage from "../hook/useLocalStorage";
 import { HOST } from "../api";
 
 const Register = () => {
+  const [jwt, setJwt] = useLocalStorage("token", "");
   const [isLoading, setLoading] = useState(false);
-  const [jwt, setJwt] = useState("");
   const handleSuccessNavigation = () => {
     navigate("/my-profile");
   };
@@ -20,19 +21,19 @@ const Register = () => {
     setLoading(true);
 
     axios
-  .post(`${HOST}/api/register`, formObject)
-  .then(function (response) {
-    console.info(response.data);
-    // navigate to my account page when success
-    setJwt(response.data.jwt);
-    handleSuccessNavigation();
-  })
-  .catch(function (error) {
-    console.error(error.response.data);
-  })
-  .finally(function () {
-    setLoading(false);
-  });
+      .post(`${HOST}/api/register`, formObject)
+      .then(function (response) {
+        console.info(response.data);
+        // navigate to my account page when success
+        setJwt(response.data.jwt);
+        handleSuccessNavigation();
+      })
+      .catch(function (error) {
+        console.error(error.response.data);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
   };
   return (
     <div
