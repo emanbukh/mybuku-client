@@ -1,1 +1,1 @@
-export const HOST = "http://localhost";
+export const HOST = "https://mybuku-api.onrender.com";
