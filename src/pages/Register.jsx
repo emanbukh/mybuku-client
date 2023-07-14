@@ -18,7 +18,7 @@ const Register = () => {
     const username = event.target[1].value;
     const password = event.target[2].value;
     const passwordConfirmation = event.target[3].value;
-    const formObject = { email, username, password, passwordConfirmation,isAdmin: isAdmin ? true : false };
+    const formObject = { email, username, password, passwordConfirmation };
     setLoading(true);
 
     axios
@@ -135,22 +135,7 @@ const Register = () => {
               placeholder="   password"
             />
           </div>
-          <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.5rem",
-        marginTop: "1rem",
-      }}
-    >
-      <label htmlFor="isAdmin">Admin</label>
-      <input
-        type="checkbox"
-        id="isAdmin"
-        checked={isAdmin}
-        onChange={(e) => setIsAdmin(e.target.checked)}
-      />
-    </div>
+          
           <button
             type="submit"
             style={{

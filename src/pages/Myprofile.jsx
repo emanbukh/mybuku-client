@@ -111,21 +111,21 @@ const Myprofile = () => {
                 <p style={{ display: "inline", fontWeight: "bold" }}>
                   {user?.username || "no data"}
                 </p>
-                {isAdmin && <AdminControl />}
+                
               </div>
               <div style={{ marginTop: "1rem" }}>
                 <p>Email</p>
                 <p style={{ display: "inline", fontWeight: "bold" }}>
                   {user?.email || "no data"}
                 </p>
-                {isAdmin && <AdminControl />}
+               
               </div>
               <div style={{ marginTop: "1rem" }}>
                 <p>Admin status</p>
                 <p style={{ display: "inline", fontWeight: "bold" }}>
                   {user?.isAdmin ? "True" : "False"}
                 </p>
-                {isAdmin && <AdminControl />}
+                
               </div>
             </div>
           </div>
@@ -134,30 +134,6 @@ const Myprofile = () => {
     </div>
   );
 };
-const AdminControl = () => {
-  return (
-    <div style={{ display: "inline", marginLeft: "1rem" }}>
-      <span
-        style={{
-          textDecoration: "underline",
-          color: "blue",
-          cursor: "pointer",
-        }}
-      >
-        Edit
-      </span>
-      <span
-        style={{
-          textDecoration: "underline",
-          marginLeft: "0.5rem",
-          color: "red",
-          cursor: "pointer",
-        }}
-      >
-        Delete
-      </span>
-    </div>
-  );
-};
+
 
 export default Myprofile;
