@@ -22,7 +22,9 @@ const Register = () => {
     setLoading(true);
 
     axios
-      .post(`${HOST}/api/register`, formObject)
+      .post(`${HOST}/api/register`, formObject, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
       .then(function (response) {
         console.info(response.data);
         // navigate to my account page when success

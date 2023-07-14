@@ -4,9 +4,11 @@ import useLocalStorage from "../hook/useLocalStorage";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { HOST } from "../api";
+import Cookies from "js-cookie";
 
 const Myprofile = () => {
-  const [jwt, setJwt] = useLocalStorage("token", "");
+  // const [jwt, setJwt] = useLocalStorage("token", "");
+  const jwt =Cookies.get("token")
   const [isAdmin, setAdmin] = useLocalStorage("isAdmin", false);
   const [user, setUser] = useLocalStorage("userData", null);
   const navigate = useNavigate();

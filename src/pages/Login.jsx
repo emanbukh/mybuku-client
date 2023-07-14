@@ -24,9 +24,10 @@ const Login = () => {  const [isLoading, setLoading] = useState(false);
         password,
       })
       .then(function (response) {
-        console.info(response.data);
+        console.info(response.data.jwt);
+        Cookies.set("token", response.data.jwt);
         // navigate to my account page when success
-        setJwt(response.data.jwt);
+        // setJwt(response.data.jwt);
         handleSucesssNavigation();
       })
       .catch(function (error) {
