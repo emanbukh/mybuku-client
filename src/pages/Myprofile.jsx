@@ -15,8 +15,6 @@ const Myprofile = () => {
     navigate("/login");
   };
   const navigateEdit = useNavigate();
-  const navigateDelete = useNavigate();
-  // const handleNavigate=() =>{Cookies.remove("token");navigateDelete("/login");location.reload();}
   const navigateLogOut = useNavigate();
   const navigateLibrary= useNavigate();
   const handleNavigateLibrary = (path)=>{navigateLibrary("/library");}
@@ -47,25 +45,6 @@ const Myprofile = () => {
       })
       .finally(function () {});
   };
-  // const handleDeleteUser = () => {
-
-
-  //   axios
-  //     .delete(`${HOST}/api/users/${user?.username}`, {
-  //       headers: { Authorization: `Bearer ${jwt}` },
-  //     })
-  //     .then(function (response) {
-  //       console.info(response.data);
-
-  //       handleNavigate();
-  //     })
-  //     .catch(function (error) {
-  //       console.error(error);
-  //     })
-  //     .finally(function () {
-  //       setLoading(false)
-  //     });
-  // };
 
   useEffect(() => {
     fetchUserAccount();
