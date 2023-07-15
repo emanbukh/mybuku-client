@@ -12,7 +12,7 @@ const Book = () => {
   const [user] = useLocalStorage("userData", null);
   const [book, setBook] = useLocalStorage("bookData", null);
   const [books, setBooks] = useState([]);
-console.log(book, setBook);
+  console.log(book, setBook);
   const param = useParams();
   const filteredArray = books.filter((item) => String(item.id) === param.id);
   const [filteredBook] = filteredArray;
@@ -86,7 +86,6 @@ console.log(book, setBook);
       .finally(function () {
         setLoading(false);
       });
-
   };
 
   return (
@@ -169,7 +168,7 @@ console.log(book, setBook);
           <div
             style={{
               width: "30rem",
-              height: "25rem",
+              maxHeight: "30rem",paddingBottom:"20px",
               backgroundColor: "#ffffff",
               borderRadius: "2rem",
               boxShadow: "1px 1px 15px  #e9ecef",
@@ -177,22 +176,25 @@ console.log(book, setBook);
               flexDirection: "column",
             }}
           >
-            <div className="ml-[70px] mt-[50px]">
+            <div className="ml-[70px] mt-[50px] h-[100%]">
               <div style={{ marginTop: "1rem" }}>
-                <p style={{ fontSize: "1.5rem", fontWeight:"bold"}}>Title :</p>
+                <p style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+                  Title :
+                </p>
                 <p
                   style={{
                     display: "inline",
                     fontWeight: "500",
                     fontSize: "1.3rem",
-                    
                   }}
                 >
                   {filteredBook?.title || "no data"}
                 </p>
               </div>
               <div style={{ marginTop: "1rem" }}>
-                <p style={{ fontSize: "1.5rem", fontWeight:"bold" }}>Price :</p>
+                <p style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+                  Price :
+                </p>
                 <p
                   style={{
                     display: "inline",
@@ -203,21 +205,24 @@ console.log(book, setBook);
                   {filteredBook?.price || "no data"}
                 </p>
               </div>
-              <div style={{ marginTop: "1rem" }}>
-                <p style={{ fontSize: "1.5rem", fontWeight:"bold" }}>Description :</p>
-                <p
+              <div style={{ marginTop: "1rem", maxHeight: "200px" }}>
+                <p style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+                  Description :
+                </p>
+                <div
                   style={{
-                    display: "inline",
                     fontWeight: "500",
-                    fontSize: "1.3rem",maxWidth: "100%",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    
+                    fontSize: "1.3rem",
+                    width: "350px",
+                    maxHeight: "100px",
+                    overflow:"auto",
+                    wordWrap: "break-word",
+                    overflowWrap: "break-word",
+                    whiteSpace: "pre-wrap",
                   }}
                 >
                   {filteredBook?.description || "no data"}
-                </p>
+                </div>
               </div>
               <button
                 style={{
@@ -225,11 +230,12 @@ console.log(book, setBook);
                   color: "black",
                   fontSize: "1rem",
                   fontWeight: "500",
-                  width: "190px",height:"30px",
+                  width: "190px",
+                  height: "30px",
 
                   borderColor: "#ff4800",
                   borderRadius: "0.75rem",
-                  marginTop: "50px",
+                  marginTop: "7px",
                   marginLeft: "90px",
                 }}
                 onClick={() => handleDeleteBook()}

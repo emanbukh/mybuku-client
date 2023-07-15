@@ -13,6 +13,8 @@ const Library = () => {
   const jwt = Cookies.get("token");
   const [books, setBooks] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [searchKeyword, setSearchKeyword] = useState("");
+
   const navigate = useNavigate();
   const navigateAddBook=useNavigate()
   const navigateAccount = useNavigate();
@@ -26,6 +28,7 @@ const Library = () => {
     navigateLogOut("/login");
     location.reload();
   };
+  
 
   const handleNavigationAddBook=(path)=>{navigateAddBook("/newbook")}
 
@@ -114,6 +117,8 @@ const Library = () => {
             className="w-[25rem] h-[3rem] text-center"
             type="text"
             placeholder="Search..."
+            value={searchKeyword}
+            onChange={(e)=> setSearchKeyword(e.target.value)}
           />
           <p className="font-[500] mt-2 underline" style={{cursor:"pointer"}} onClick={()=>handleNavigationAddBook("newbook")}>Add new book here</p>
         </div>
@@ -121,31 +126,37 @@ const Library = () => {
           {books.length} {pluralize("Book", books.length)}
         </h1>
         <div
-          style={{
-            width: "60rem",maxWidth: "60rem",
-            maxHeight: "30rem",
-            backgroundColor: "#ffffff",
-            borderRadius: "2rem",
-            boxShadow: "1px 1px 15px  #e9ecef",
-            display: "flex",
-            flexWrap:"wrap",
-            flexDirection: "row",
-            overflow: "auto",
-            scrollBehavior: "smooth",
-            justifyContent:"center"
-          }}
-          className="mt-5 grid grid-cols-4 lg:grid-col-6 gap-[1rem] "
-        >
-          {isLoading ? (
-            <p
-              style={{ width: "100%", textAlign: "center", marginTop: "3rem" }}
-            >
-              Loading Your Books...
-            </p>
-          ) : (
-            books.map((book, index) => <BookCard key={index} book={book} />)
-          )}
-        </div>
+  style={{
+    width: "60rem",
+    maxWidth: "60rem",
+    maxHeight: "30rem",
+    backgroundColor: "#ffffff",
+    borderRadius: "2rem",
+    boxShadow: "1px 1px 15px #e9ecef",
+    display: "flex",
+    flexWrap: "wrap",
+    overflow: "auto",
+    scrollBehavior: "smooth",
+    justifyContent: "center",
+  }}
+  className="mt-5 grid grid-cols-4 lg:grid-col-6 gap-[1rem] "
+>
+  {isLoading ? (
+    <p
+      style={{ width: "100%", textAlign: "center", marginTop: "3rem" }}
+    >
+      Loading Your Books...
+    </p>
+  ) : (
+    books.length > 0 &&
+    books
+      .filter((book) =>
+        book.title.toLowerCase().includes(searchKeyword.toLowerCase())
+      )
+      .map((book, index) => <BookCard key={index} book={book} />)
+  )}
+</div>
+
       </div>
     </div>
   );
