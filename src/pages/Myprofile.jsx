@@ -14,15 +14,16 @@ const Myprofile = () => {
   const handleNavigateToLogin = () => {
     navigate("/login");
   };
-  const navigateLibrary = useNavigate();
-  const navigateAccount = useNavigate();
+  const navigateEdit = useNavigate();
+  const navigateDelete = useNavigate();
+  const handleNavigate=() =>{Cookies.remove("token");navigateDelete("/login");location.reload();}
   const navigateLogOut = useNavigate();
-  const handleNavigateLibrary = (path) => {
-    navigateLibrary("/library");
+  const navigateLibrary= useNavigate();
+  const handleNavigateLibrary = (path)=>{navigateLibrary("/library");}
+  const handleNavigateEdit = (path) => {
+    navigateEdit("/edituser");
   };
-  const handleNavigateAccount = (path) => {
-    navigateAccount("/my-profile");
-  };
+  
   const handleLogoutOut = () => {
     Cookies.remove("token");
     navigateLogOut("/login");
@@ -45,6 +46,25 @@ const Myprofile = () => {
         handleNavigateToLogin();
       })
       .finally(function () {});
+  };
+  const handleDeleteUser = () => {
+
+
+    axios
+      .delete(`${HOST}/api/users/${user?.username}`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then(function (response) {
+        console.info(response.data);
+
+        handleNavigate();
+      })
+      .catch(function (error) {
+        console.error(error);
+      })
+      .finally(function () {
+        
+      });
   };
 
   useEffect(() => {
@@ -103,7 +123,7 @@ const Myprofile = () => {
         <div
           style={{
             width: "30rem",
-            height: "25rem",
+            height: "30rem",
             backgroundColor: "#ffffff",
             borderRadius: "2rem",
             boxShadow: "1px 1px 15px  #e9ecef",
@@ -122,7 +142,7 @@ const Myprofile = () => {
               justifyContent: "center",
             }}
           >
-            <h1 className="mt-5 text-right">
+            <h1 className="mt-5 text-right font-bold">
               Heyy, this is your profile here!
             </h1>
             <div
@@ -177,6 +197,40 @@ const Myprofile = () => {
                     {user?.isAdmin ? "True" : "False"}
                   </p>
                 </div>
+              </div>
+              <div className="w-[50%] flex flex-row ml-[100px]">
+                <button
+                  className="mt-1 "
+                  style={{
+                    backgroundColor: "#d1ccd2",
+                    color: "black",
+                    width: "100px",
+                    height: "40px",
+                    background: "#c4d6b0",
+                    borderRadius: "10px",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                  }}
+                  onClick={() => handleNavigateEdit("edit")}
+                >
+                  Edit
+                </button>{" "}
+                <button
+                  className="mt-1 ml-4"
+                  style={{
+                    backgroundColor: "#d1ccd2",
+                    color: "black",
+                    width: "110px",
+                    height: "40px",
+                    borderRadius: "10px",
+                    background: "#c4d6b0",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                  }}
+                  onClick={handleDeleteUser("login")}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ import Users from "./pages/Users";
 import Library from "./pages/Library";
 import Book from "./pages/Book";
 import NewBook from "./pages/NewBook";
+import EditUser from "./pages/EditUser";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +27,9 @@ function App() {
     {
       path: "/my-profile",
       element: <Myprofile />,
+    },{
+      path: "/edituser",
+      element: <EditUser />,
     },{
       path: "/library",
       element: <Library/>,
