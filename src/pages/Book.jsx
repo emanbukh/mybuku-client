@@ -12,7 +12,7 @@ const Book = () => {
   const [user] = useLocalStorage("userData", null);
   const [book, setBook] = useLocalStorage("bookData", null);
   const [books, setBooks] = useState([]);
-
+console.log(book, setBook);
   const param = useParams();
   const filteredArray = books.filter((item) => String(item.id) === param.id);
   const [filteredBook] = filteredArray;
@@ -36,7 +36,38 @@ const Book = () => {
     navigateLogOut("/login");
     location.reload();
   };
+  const fetchAllBook = () => {
+    //   change loading state to true
+    setLoading(true);
 
+    // get jwt from localStorage
+    console.log(jwt);
+    console.log(book);
+    // run get api
+    axios
+      .get(`${HOST}/api/books`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then(function (response) {
+        // handle success
+        console.info(response.data.data);
+        setBooks(response.data.data);
+        setBook(response.data.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.error(error);
+        if (error.response === 401) {
+          navigate("/library");
+        }
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    fetchAllBook();
+  }, []);
   const handleDeleteBook = () => {
     const id = filteredBook?.id;
 
@@ -55,6 +86,7 @@ const Book = () => {
       .finally(function () {
         setLoading(false);
       });
+
   };
 
   return (
@@ -131,7 +163,7 @@ const Book = () => {
             marginRight: "50px",
           }}
         >
-          Books
+          Book
         </h1>
         <div style={{ width: "100%", maxWidth: "550px" }}>
           <div
@@ -147,39 +179,41 @@ const Book = () => {
           >
             <div className="ml-[70px] mt-[50px]">
               <div style={{ marginTop: "1rem" }}>
-                <p style={{ fontSize: "1.2rem" }}>Title :</p>
+                <p style={{ fontSize: "1.5rem", fontWeight:"bold"}}>Title :</p>
                 <p
                   style={{
                     display: "inline",
-                    fontWeight: "bold",
+                    fontWeight: "500",
                     fontSize: "1.3rem",
-                    color: "#ff4800",
+                    
                   }}
                 >
                   {filteredBook?.title || "no data"}
                 </p>
               </div>
               <div style={{ marginTop: "1rem" }}>
-                <p style={{ fontSize: "1.2rem" }}>Price :</p>
+                <p style={{ fontSize: "1.5rem", fontWeight:"bold" }}>Price :</p>
                 <p
                   style={{
                     display: "inline",
-                    fontWeight: "bold",
+                    fontWeight: "500",
                     fontSize: "1.3rem",
-                    color: "#ff4800",
                   }}
                 >
                   {filteredBook?.price || "no data"}
                 </p>
               </div>
               <div style={{ marginTop: "1rem" }}>
-                <p style={{ fontSize: "1.2rem" }}>Description :</p>
+                <p style={{ fontSize: "1.5rem", fontWeight:"bold" }}>Description :</p>
                 <p
                   style={{
                     display: "inline",
-                    fontWeight: "bold",
-                    fontSize: "1.3rem",
-                    color: "#ff4800",
+                    fontWeight: "500",
+                    fontSize: "1.3rem",maxWidth: "100%",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    
                   }}
                 >
                   {filteredBook?.description || "no data"}
@@ -200,7 +234,7 @@ const Book = () => {
                 }}
                 onClick={() => handleDeleteBook()}
               >
-                Delete Project?
+                Delete This Book?
               </button>
             </div>
           </div>

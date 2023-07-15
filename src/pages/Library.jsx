@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 const Library = () => {
   const [user] = useLocalStorage("userData", null);
   const [book, setBook] = useLocalStorage("booktData", null);
+  
   const jwt = Cookies.get("token");
   const [books, setBooks] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -121,15 +122,17 @@ const Library = () => {
         </h1>
         <div
           style={{
-            width: "60rem",
-            height: "30rem",
+            width: "60rem",maxWidth: "60rem",
+            maxHeight: "30rem",
             backgroundColor: "#ffffff",
             borderRadius: "2rem",
             boxShadow: "1px 1px 15px  #e9ecef",
             display: "flex",
+            flexWrap:"wrap",
             flexDirection: "row",
             overflow: "auto",
             scrollBehavior: "smooth",
+            justifyContent:"center"
           }}
           className="mt-5 grid grid-cols-4 lg:grid-col-6 gap-[1rem] "
         >
