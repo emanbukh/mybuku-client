@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-const useLocalStorage = (storageKey, fallbackState) => {console.log(storageKey);
+const useLocalStorage = (storageKey, fallbackState) => {;
   const [value, setValue] = useState(
-    JSON.parse(localStorage.getItem(storageKey)) ?? fallbackState
+    JSON.parse(localStorage.getItem(storageKey)) ?? fallbackState 
   );
 
   useEffect(() => {
-    localStorage.setItem(storageKey, JSON.stringify(value));
-  }, [value, storageKey]);
+    localStorage.setItem(storageKey, JSON.stringify(value)) ;console.log(value);
+  }, [value, storageKey] ) ;
 
   return [value, setValue];
 };

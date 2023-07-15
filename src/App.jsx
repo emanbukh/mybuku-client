@@ -6,6 +6,8 @@ import Myprofile from "./pages/Myprofile";
 import Admin from "./pages/Admin";
 import Users from "./pages/Users";
 import Library from "./pages/Library";
+import Book from "./pages/Book";
+import NewBook from "./pages/NewBook";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +29,13 @@ function App() {
     },{
       path: "/library",
       element: <Library/>,
+    },
+    {
+      path: "/book/:id",
+      element: <Book/>,
+    },{
+      path: "/newbook",
+      element: <NewBook/>,
     },
     {
       path: "/admin",
