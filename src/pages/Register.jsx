@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useLocalStorage from "../hook/useLocalStorage";
 import { HOST } from "../api";
+import Cookies from "js-cookie";
 
 const Register = () => {
-  const [jwt, setJwt] = useLocalStorage("token", "");const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);const [isAdmin, setIsAdmin] = useState(false)
+  const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleSuccessNavigation = () => {
-    navigate("/my-profile");
+    navigate("/login");
   };
 
   const handleSubmit = (event) => {
@@ -22,17 +23,20 @@ const Register = () => {
     setLoading(true);
 
     axios
-      .post(`${HOST}/api/register`, formObject, {
-        headers: { Authorization: `Bearer ${jwt}` },
+      .post(`${HOST}/api/register`,{
+        
+        email,
+        username,
+        password,
       })
       .then(function (response) {
         console.info(response.data);
         // navigate to my account page when success
-        setJwt(response.data.jwt);
+    
         handleSuccessNavigation();
       })
       .catch(function (error) {
-        console.error(error.response.data);
+        console.error(error.response);
       })
       .finally(function () {
         setLoading(false);

@@ -13,7 +13,7 @@ const Myprofile = () => {
   const [user, setUser] = useLocalStorage("userData", null);
   const navigate = useNavigate();
   const handleNavigateToLogin = () => {
-    navigate("/library");
+    navigate("/login");
   };
   const fetchUserAccount = () => {
     console.log(jwt);
