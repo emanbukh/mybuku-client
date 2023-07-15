@@ -64,7 +64,7 @@ const EditUser = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-         height: "100vh",
+        
           alignItems: "center",
           justifyContent: "center",
          background:"#fefae0"
@@ -77,7 +77,7 @@ const EditUser = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              justifyContent: "center",
+              
               
             }}
           >
