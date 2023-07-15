@@ -34,7 +34,7 @@ const Home = () => {
             Welcome to MyBuku
           </p>
           <p className="pt-5 px-5">
-            this website help users to record all of their books online, can be
+            this website help poeple to publish their book reviews online, it can be
             access wherever and whenever they want{" "}
           </p>{" "}
           <p className="mt-[5rem]">Already have your own account? <span className="font-bold">Sign in ASAP!</span></p>

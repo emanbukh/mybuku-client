@@ -62,7 +62,7 @@ const Login = () => {  const [isLoading, setLoading] = useState(false);
           <h1 className="text-xl font-bold">Bookworm Login</h1>
         </div>
         <div className="w-[250px] text-center  ">
-          <h3>Hey, enter your details to get sign to your account</h3>
+          <h3>Hey, enter your details to sign in</h3>
         </div>
         <form
           className="w-[320px] h-[360px]"
