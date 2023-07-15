@@ -227,7 +227,7 @@ const Myprofile = () => {
                     fontSize: "1rem",
                     fontWeight: "bold",
                   }}
-                  onClick={handleDeleteUser("login")}
+                  onClick={handleLogoutOut("login")}
                 >
                   Delete
                 </button>
