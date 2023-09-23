@@ -7,10 +7,17 @@ import pluralize from "pluralize";
 import Cookies from "js-cookie";
 
 const Library = () => {
+  /* The line `const [user] = useLocalStorage("userData", null);` is using the `useLocalStorage` hook
+  to retrieve the value stored in the "userData" key of the browser's local storage. The retrieved
+  value is then stored in the `user` constant. If there is no value stored in the "userData" key,
+  the default value of `null` is assigned to `user`. */
   const [user] = useLocalStorage("userData", null);
   const [book, setBook] = useLocalStorage("booktData", null);
   
-  const jwt = Cookies.get("token");
+  /* The line `const jwt = Cookies.get("token");` is retrieving the value of the "token" cookie using
+  the `Cookies.get()` method from the "js-cookie" library. The retrieved value is then stored in the
+  `jwt` constant. */
+
   const [books, setBooks] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -33,6 +40,7 @@ const Library = () => {
   const handleNavigationAddBook=(path)=>{navigateAddBook("/newbook")}
 
   const fetchAllBook = () => {
+    const jwt = Cookies.get("token");
     //   change loading state to true
     setLoading(true);
 
