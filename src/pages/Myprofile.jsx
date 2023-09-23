@@ -25,7 +25,7 @@ const Myprofile = () => {
   const handleLogoutOut = () => {
     Cookies.remove("token");
     navigateLogOut("/login");
-    location.reload();
+   
   };
   const fetchUserAccount = () => {
     console.log(jwt);
