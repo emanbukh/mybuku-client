@@ -28,28 +28,33 @@ const Myprofile = () => {
    
   };
   const fetchUserAccount = () => {
-    if (jwt) { // Check if JWT token exists
-      axios
-        .get(`${HOST}/private`, {
-          headers: { Authorization: `Bearer ${jwt}` },
-        })
-        .then(function (response) {
-          console.info(response.data);
-          setUser(response.data.user);
-        })
-        .catch(function (error) {
-          console.error(error);
-          handleNavigateToLogin();
-        });
-    } else {
-      // No JWT token found, handle this case (e.g., redirect to login)
-      handleNavigateToLogin();
-    }
+    console.log(jwt);
+   
+    /* The code `axios.get(`/private`, { headers: { Authorization: `Bearer ` } })` is
+    making a GET request to the `/private` endpoint with an Authorization header containing a
+    JWT (JSON Web Token) in the format `Bearer `. This is typically used for authentication
+    purposes, where the server expects a valid JWT in the Authorization header to grant access to
+    the protected resource. */
+    axios
+      .get(`${HOST}/private`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then(function (response) {
+        console.info(response.data);
+        setUser(response.data.user);
+      })
+      .catch(function (error) {
+        console.error(error);
+        handleNavigateToLogin();
+      })
+      .finally(function () {});
   };
 
+ /* The `useEffect` hook is used to perform side effects in a functional component. In this case, it is
+ used to fetch the user account information when the `jwt` variable changes. */
   useEffect(() => {
     fetchUserAccount();
-  }, [jwt]);
+  }, []);
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
