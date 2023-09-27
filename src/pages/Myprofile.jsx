@@ -9,27 +9,42 @@ import Cookies from "js-cookie";
 const Myprofile = () => {
   // const [jwt, setJwt] = useLocalStorage("token", "");
   const jwt = Cookies.get("token");
-  const [user, setUser] = useLocalStorage("userData", null);
+  /* The line `const [user] = useLocalStorage("userData", null);` is using a custom hook called
+  `useLocalStorage` to declare a state variable called `user` and a corresponding function to update
+  the state variable. The `useLocalStorage` hook is responsible for storing and retrieving data from
+  the browser's local storage. */
+  const [user] = useLocalStorage("userData", null);
+  /* The line `const [users, setUsers]=useState([])` is declaring a state variable called `users` and a
+  corresponding function called `setUsers` to update the state variable. The initial value of the
+  `users` state variable is an empty array `[]`. This is a common pattern in React to manage and
+  update state in functional components. */
+  const [users, setUsers] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
   const handleNavigateToLogin = () => {
     navigate("/login");
   };
   const navigateEdit = useNavigate();
   const navigateLogOut = useNavigate();
-  const navigateLibrary= useNavigate();
-  const handleNavigateLibrary = (path)=>{navigateLibrary("/library");}
+  const navigateLibrary = useNavigate();
+  const handleNavigateLibrary = (path) => {
+    navigateLibrary("/library");
+  };
   const handleNavigateEdit = (path) => {
     navigateEdit("/edituser");
   };
-  
+
   const handleLogoutOut = () => {
     Cookies.remove("token");
     navigateLogOut("/login");
-   
   };
   const fetchUserAccount = () => {
+    setLoading(true);
     console.log(jwt);
-   
+    console.log(jwt);
+    console.log(jwt);
+    console.log(jwt);
+
     /* The code `axios.get(`/private`, { headers: { Authorization: `Bearer ` } })` is
     making a GET request to the `/private` endpoint with an Authorization header containing a
     JWT (JSON Web Token) in the format `Bearer `. This is typically used for authentication
@@ -41,16 +56,20 @@ const Myprofile = () => {
       })
       .then(function (response) {
         console.info(response.data);
-        setUser(response.data.user);
+        setUsers(response.data.data);
       })
       .catch(function (error) {
         console.error(error);
-        handleNavigateToLogin();
+        if (error.response.status === 401) {
+          handleNavigateToLogin();
+        }
       })
-      .finally(function () {});
+      .finally(function () {
+        setLoading(false);
+      });
   };
 
- /* The `useEffect` hook is used to perform side effects in a functional component. In this case, it is
+  /* The `useEffect` hook is used to perform side effects in a functional component. In this case, it is
  used to fetch the user account information when the `jwt` variable changes. */
   useEffect(() => {
     fetchUserAccount();
