@@ -28,22 +28,23 @@ const Myprofile = () => {
    
   };
   const fetchUserAccount = () => {
-    console.log(jwt);
-    Cookies.get("token");
-
-    axios
-      .get(`${HOST}/private`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
-      .then(function (response) {
-        console.info(response.data);
-        setUser(response.data.user);
-      })
-      .catch(function (error) {
-        console.error(error);
-        handleNavigateToLogin();
-      })
-      .finally(function () {});
+    if (jwt) { // Check if JWT token exists
+      axios
+        .get(`${HOST}/private`, {
+          headers: { Authorization: `Bearer ${jwt}` },
+        })
+        .then(function (response) {
+          console.info(response.data);
+          setUser(response.data.user);
+        })
+        .catch(function (error) {
+          console.error(error);
+          handleNavigateToLogin();
+        });
+    } else {
+      // No JWT token found, handle this case (e.g., redirect to login)
+      handleNavigateToLogin();
+    }
   };
 
   useEffect(() => {
